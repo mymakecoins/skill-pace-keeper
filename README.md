@@ -195,6 +195,59 @@ Adicione o conteúdo de [`SKILL.md`](./SKILL.md) como prompt de sistema ou instr
 
 ---
 
+## ⚡ Instalação e Uso no Ecossistema Codex
+
+O **Pace Keeper** é nativamente compatível com o ecossistema Codex (OpenAI Codex / Codex CLI / Agentes Codex), integrando-se diretamente ao catálogo de skills do ambiente.
+
+### 1. Instalação Global no Diretório de Skills do Codex
+
+Clone ou crie um link simbólico no diretório global de skills do Codex (`~/.codex/skills/`):
+
+```bash
+# Opção A: Clonagem direta
+git clone git@github.com:mymakecoins/skill-pace-keeper.git ~/.codex/skills/pace-keeper
+
+# Opção B: Link simbólico para repositório já clonado
+ln -sf /home/mmc/00_code/00_tools/_skills/pace-keeper ~/.codex/skills/pace-keeper
+```
+
+Como o arquivo [`SKILL.md`](./SKILL.md) já possui o frontmatter YAML padrão (`name: pace-keeper`), o motor de agentes do Codex indexa a skill automaticamente ao iniciar novas sessões.
+
+---
+
+### 2. Integração por Projeto via `.codexrules`
+
+Para instruir o agente Codex a adotar a disciplina de ritmo em um repositório específico, adicione ao seu arquivo `.codexrules` na raiz do projeto:
+
+```markdown
+## Governança de Ritmo e Prazos (Pace Keeper)
+- Para estimativas de entrega, auditoria de backlog ou cálculo de viabilidade de milestones, execute a metodologia da skill `pace-keeper`.
+- Reserve sempre o buffer obrigatório de homologação/staging (Code Freeze).
+- Para persistir o diagnóstico, gere a entrega dupla (Markdown e HTML Standalone executivo via script):
+  `python3 ~/.codex/skills/pace-keeper/scripts/export_html.py "AAAAMMDD-pace-keeper-<projeto>.md"`
+```
+
+---
+
+### 3. Chamada Direta via CLI / Scripts no Codex
+
+O agente Codex ou seus scripts de esteira podem invocar diretamente as ferramentas determinísticas:
+
+```bash
+# Calcular throughput e capacidade necessária
+python3 ~/.codex/skills/pace-keeper/scripts/calculate_pace.py \
+  --start-date AAAA-MM-DD \
+  --target-date AAAA-MM-DD \
+  --tasks-p 5 --tasks-m 8 --tasks-g 2 \
+  --atomic-tasks 40 \
+  --analysts 2
+
+# Exportar relatório para HTML executivo com tema escuro/claro e Mermaid
+python3 ~/.codex/skills/pace-keeper/scripts/export_html.py "AAAAMMDD-pace-keeper-projeto.md"
+```
+
+---
+
 ## 📄 Licença
 
 Distribuído sob a licença MIT. Consulte o repositório para mais informações.
