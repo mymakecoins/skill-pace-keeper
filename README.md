@@ -141,6 +141,60 @@ A skill estará imediatamente disponível para invocação em sessões de pair-p
 
 ---
 
+## 🤖 Instalação e Uso no Ecossistema Claude
+
+O **Pace Keeper** é totalmente compatível com o ecossistema Claude (Claude Code, Claude Projects e Claude Desktop).
+
+### 1. Claude Code (CLI)
+
+#### Opção A: Como Slash Command Global (`/pace-keeper`)
+Vincule o arquivo `SKILL.md` ao diretório de comandos personalizados do Claude Code:
+
+```bash
+mkdir -p ~/.claude/commands
+ln -sf /home/mmc/00_code/00_tools/_skills/pace-keeper/SKILL.md ~/.claude/commands/pace-keeper.md
+```
+
+> **Uso:** Em qualquer repositório, basta digitar `/pace-keeper` na sessão do Claude Code para acionar a sondagem inicial e a metodologia completa.
+
+#### Opção B: Como Slash Command no Projeto Local
+Se desejar disponibilizar a skill apenas em um repositório específico da equipe:
+
+```bash
+mkdir -p .claude/commands
+cp /caminho/para/skill-pace-keeper/SKILL.md .claude/commands/pace-keeper.md
+```
+
+#### Opção C: Execução Automatizada via Bash
+Como o Claude Code possui execução de comandos terminal via ferramenta bash, ele pode rodar diretamente os scripts oficiais da skill durante a sessão:
+
+```bash
+# Cálculo do throughput e capacidade
+python3 /home/mmc/00_code/00_tools/_skills/pace-keeper/scripts/calculate_pace.py --target-date AAAA-MM-DD ...
+
+# Compilação automática do relatório em HTML Standalone
+python3 /home/mmc/00_code/00_tools/_skills/pace-keeper/scripts/export_html.py "AAAAMMDD-pace-keeper-projeto.md"
+```
+
+---
+
+### 2. Claude Projects (claude.ai)
+
+1. Crie ou acesse seu projeto no **Claude Projects**.
+2. Cole o conteúdo de [`SKILL.md`](./SKILL.md) no campo **Project Instructions** (Instruções do Projeto).
+3. Em **Project Knowledge** (Arquivos de Conhecimento), adicione os arquivos:
+   - `templates/pace-keeper-template.html` (para renderização visual de referência).
+   - `scripts/calculate_pace.py` e `scripts/export_html.py` (para referência algorítmica).
+4. O Claude atuará automaticamente como o guardião de ritmo em todas as conversas dentro do projeto.
+
+---
+
+### 3. Claude Desktop / Prompt de Sistema
+
+Adicione o conteúdo de [`SKILL.md`](./SKILL.md) como prompt de sistema ou instrução inicial ao iniciar planejamentos de sprint, revisões de milestone ou auditorias de entrega.
+
+---
+
 ## 📄 Licença
 
 Distribuído sob a licença MIT. Consulte o repositório para mais informações.
